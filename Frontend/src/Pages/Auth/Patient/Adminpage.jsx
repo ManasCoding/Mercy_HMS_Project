@@ -1,5 +1,5 @@
 import React from 'react'
-import Sidebar from '../../../Compnents/sidebar'
+import Sidebar from '../../../Compnents/Sidebar'
 import Sidenavbar from '../../../Compnents/Sidenavbar'
 import Dashboard from './Dashboard'
 const Adminpage = () => {

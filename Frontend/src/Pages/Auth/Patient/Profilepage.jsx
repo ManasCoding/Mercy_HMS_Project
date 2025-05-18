@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from './Profile'
 import Sidenavbar from '../../../Compnents/Sidenavbar'
-import Sidebar from '../../../Compnents/sidebar'
+import Sidebar from '../../../Compnents/Sidebar'
 const Profilepage = () => {
   return (
     <div>

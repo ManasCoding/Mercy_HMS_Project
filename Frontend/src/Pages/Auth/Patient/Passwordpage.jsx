@@ -1,7 +1,7 @@
 import React from 'react'
 import ChangePassword from './ChangePassword'
 import Sidenavbar from '../../../Compnents/Sidenavbar'
-import Sidebar from '../../../Compnents/sidebar'
+import Sidebar from '../../../Compnents/Sidebar'
 const ChangePasswordpage = () => {
   return (
     <div>

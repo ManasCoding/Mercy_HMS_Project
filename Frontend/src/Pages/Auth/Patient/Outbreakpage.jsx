@@ -1,6 +1,6 @@
 import React from 'react'
 import Outbreak from './Outbreak'
-import Sidebar from '../../../Compnents/sidebar'
+import Sidebar from '../../../Compnents/Sidebar'
 import Sidenavbar from '../../../Compnents/Sidenavbar'
 const Outbreakpage = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import image from "../assets/profile.png";
 import { Link } from 'react-router-dom';
-const sidebar = () => {
+const Sidebar = () => {
   return (
     <div>
       <div className='w-full h-screen bg-[#65adff] flex flex-col justify-between'>
@@ -35,4 +35,4 @@ const sidebar = () => {
   )
 }
 
-export default sidebar
+export default Sidebar

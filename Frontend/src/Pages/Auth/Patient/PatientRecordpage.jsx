@@ -1,5 +1,5 @@
 import Sidenavbar from '../../../Compnents/Sidenavbar'
-import Sidebar from '../../../Compnents/sidebar'
+import Sidebar from '../../../Compnents/Sidebar'
 import PatientRecord from './PatientRecord'
 const PatientRecordpage = () => {
   return (
