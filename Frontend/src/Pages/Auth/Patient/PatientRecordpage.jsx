@@ -1,7 +1,6 @@
-import React from 'react'
-import Sidebar from '../../../Compnents/sidebar'
 import Sidenavbar from '../../../Compnents/Sidenavbar'
-import PatientRecord from '../Patient/PatientRecord'
+import Sidebar from '../../../Compnents/sidebar'
+import PatientRecord from './PatientRecord'
 const PatientRecordpage = () => {
   return (
     <div>
