@@ -15,10 +15,6 @@ const PatientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    patientId: {
-      type: Number,
-      required: true,
-    },
     gender: {
       type: String,
     },

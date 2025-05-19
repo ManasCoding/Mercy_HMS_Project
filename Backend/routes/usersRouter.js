@@ -3,14 +3,19 @@ import express from "express";
 const router = express.Router();
 // import Router from "express";
 // const { signup , login, logout} = require('../controllers/authController');
+import { signup } from "../controllers/authController.js";
 
-router.get('/', (req, res) => {
+
+router.get('/login', (req, res) => {
     res.send('users world');
 })
 
-// router.post("/signup", signup);
+router.post("/signup", signup);
+// router.get("/signup", (req, res) => {
+//     res.send('signup page');
+// });
 
-// router.post("/login", (req, res) => {
+// router.get("/login", (req, res) => {
 //     res.send('login page');
 // })
 

@@ -1,7 +1,8 @@
 import usermodel from "../models/PatientModel.js";
-import bycrpt from "bcryptjs";
+// import bycrpt from "bcryptjs";
+import bcrypt from "bcrypt";
 // const { generateToken } = require('../utils/generateToken');
-import { generateToken } from "../utils/generateToken.js";
+import generateToken from "../utils/generateToken.js";
 
 export const signup = async function (req, res) {
     try {
@@ -21,7 +22,7 @@ export const signup = async function (req, res) {
         let user = await usermodel.findOne({ email: email });
         if (user) return res.status(400).send({message: "User found with this email. Try with new one!!!"});
 
-        bycrpt.genSalt(10, function (err, salt) {
+        bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(password, salt, async function (err, hash) {
                 if (err) return res.status(500).send("mithun");
                 else {
