@@ -3,7 +3,6 @@ import { FaCog } from "react-icons/fa";
 import { TbLockCog } from "react-icons/tb";
 
 // import avatar from "../../../assets/profile.png";
-// import { Skeleton } from "@/components/ui/skeleton";
 // import { useEffect } from "react";
 // import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";

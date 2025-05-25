@@ -7,15 +7,15 @@ const Sidenavbar = () => {
   const [res, setRes] = useState(null);
 
   const fetchData = async () => {
-  try {
-    const res = await axios.get("/login");
-    console.log(res.data);
-    setRes(res.data);
+    try {
+      const res = await axios.get("/login");
+      console.log(res.data);
+      setRes(res.data);
 
-  } catch (err) {
-    console.error("Error fetching data:", err.message);
-  }
-};
+    } catch (err) {
+      console.error("Error fetching data:", err.message);
+    }
+  };
 
 useEffect(() => {
   fetchData();

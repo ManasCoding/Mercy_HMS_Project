@@ -1,15 +1,14 @@
 import { ImEye } from "react-icons/im";
 import { RiEyeCloseFill } from "react-icons/ri";
-// import Button from "../../Compnents/button";
 import {  useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PublicNav from "../../Compnents/PublicNav";
-import axios from "../../helper/config";
+import axios from "axios";
+import { toast } from 'react-toastify';
+
 
 const Register_Form = () => {
-  // const navigate = useNavigate();
-  // const Dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -101,18 +100,22 @@ const Register_Form = () => {
       const email = user.email;
       const password = user.firstpassword;
       
-      const response = await axios.post("/signup", {
+      const response = await axios.post("http://localhost:7002/users/signup", {
         username,
         email,
         password,
       });
+
       // setSuccess(true);
       console.log("Registered:", response.data);
       // Optionally reset form:
       setUser({ name: "", email: "", firstpassword: "", secondPassword: "" });
+      toast.success("Registration successful!");
+      navigate("/login");
+      
     } catch (err) {
       // setError(err.response.data);
-      console.log(err.massage);
+      console.log("error", err.massage);
     } 
 
       
@@ -135,7 +138,7 @@ const Register_Form = () => {
       >
         <div className="w-full flex justify-center">
           <h1 className="shadow-lg shadow-[#005CC8] text-xl font-bold text-black border-4 border-[#3c97ff] bg-[#005CC8] px-2 py-1 rounded-full text-white hover:text-black">
-            Register-Form {user.name}
+            Register-Form
           </h1>
         </div>
         <div className="input-container flex flex-col">

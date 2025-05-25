@@ -1,4 +1,3 @@
-// import React from 'react'
 import React from "react";  
 import image from "../assets/SUM.jpg";
 const Parallax = () => {

@@ -1,5 +1,3 @@
-// import React from 'react'
-
 import { useState } from "react";
 import Button  from "./button";
 import image from "../assets/mercy.jpg";

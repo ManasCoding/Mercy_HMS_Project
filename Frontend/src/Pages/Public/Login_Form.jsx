@@ -1,23 +1,19 @@
-// import React from 'react'
+import React from 'react'
 import { ImEye } from "react-icons/im";
 import { RiEyeCloseFill } from "react-icons/ri";
-import Button from "../../Compnents/button";
-// import { logInUserAPI } from "@/helper/API/user";
-import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
-import { Link  } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate  } from "react-router-dom";
+import axios from "axios";
 import PublicNav from "../../Compnents/PublicNav";
-// import { toast, ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
 
 const Login_Form = () => {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const location = useLocation();
-  // const [user, setUser] = useState({
-  //   username: "",
-  //   password: "",
-  // });
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -35,9 +31,9 @@ const Login_Form = () => {
   const imageUrl =
     "https://img.freepik.com/premium-photo/hospital-hallway-unfocused-background_786878-6945.jpg?size=626&ext=jpg&ga=GA1.1.1289161518.1725302723&semt=ais_hybrid";
 
-  // const inputChangeHandler = (e) => {
-  //   setUser({ ...user, [e.target.name]: e.target.value });
-  // };
+  const inputChangeHandler = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   // const isFormValid = () => {
   //   const { username: email, password } = user;
@@ -53,27 +49,42 @@ const Login_Form = () => {
   //   return true;
   // };          
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     if (isFormValid()) {
-  //       const loginAPIresponse = await dispatch(
-  //         logInUserAPI({ email: user.username, password: user.password })
-  //       ).unwrap();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(user);
+    // try {
+    //   if (isFormValid()) {
+    //     const loginAPIresponse = await dispatch(
+    //       logInUserAPI({ email: user.username, password: user.password })
+    //     ).unwrap();
 
-  //       if (loginAPIresponse) {
-  //         navigate("/user/dashboard", {
-  //           state: {
-  //             message: "You'hv been successfully loggedin...",
-  //           },
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     toast.error("Invalid credentials");
-  //   }
-  // };
+    //     if (loginAPIresponse) {
+    //       navigate("/user/dashboard", {
+    //         state: {
+    //           message: "You'hv been successfully loggedin...",
+    //         },
+    //       });
+    //     }
+    //   }
+    // } catch (error) {
+    //   console.log(error.message);
+    //   toast.error("Invalid credentials");
+    // }
+
+    try {
+      const email = user.email;
+      const password = user.password;
+      const res = await axios.post("http://localhost:7002/users/login", {
+        email,
+        password,
+      });
+      console.log("response", res.data);
+      toast.success("You've been successfully loggedin...");
+      navigate("/user/adminpage");
+    } catch (err) {
+      console.error("Error fetching data:", err.message);
+    }
+  };
 
   return (
     <div
@@ -89,7 +100,7 @@ const Login_Form = () => {
       ></div>
 
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="relative z-10 shadow-lg shadow-[#005CC8] w-1/4 border-[#005CC8] border-4 rounded-md mx-auto px-2 py-5 mt-24"
       >
         <div className="w-full flex justify-center">
@@ -99,14 +110,14 @@ const Login_Form = () => {
         </div>
         <div className="input-container flex flex-col">
           <label htmlFor="name" className="text-xl font-bold text-black">
-            Username:{" "}
+            Email:{" "}
           </label>
           <input
             type="email"
             placeholder="Enter your email..."
-            name="username"
-            // value={user.username}
-            // onChange={inputChangeHandler}
+            name="email"
+            value={user.email}
+            onChange={inputChangeHandler}
             className="bg-[#0077ff94] px-2 font-semibold placeholder-[#005CC8] text-white focus:outline-none"
           />
         </div>
@@ -119,8 +130,8 @@ const Login_Form = () => {
               type={passwordVisible ? "text" : "password"}
               placeholder="Enter your password..."
               name="password"
-              // value={user.password}
-              // onChange={inputChangeHandler}
+              value={user.password}
+              onChange={inputChangeHandler}
               className="w-full bg-[#0077ff94] px-2 font-semibold placeholder-[#005CC8] text-white focus:outline-none"
             />
             <div
@@ -136,11 +147,11 @@ const Login_Form = () => {
           {/* <button className="hover:bg-white hover:border-secondary active:scale-110 hover:text-black rounded-3xl px-5 py-1 border-2 bg-secondary text-white text-xl font-bold">
             Login
           </button> */}
-          <Button title="Login"
+          <button
             type="submit" 
             className="hover:bg-white hover:border-secondary active:scale-110 hover:text-black rounded-3xl px-5 py-1 border-2 bg-secondary text-white text-xl font-bold"
-          >
-          </Button>
+          >Login
+          </button>
           <Link
             to="/search/username"
             className="relative z-10 text-black text-sm font-semibold hover:text-primary hover:underline hover"
