@@ -1,6 +1,7 @@
 import image from "../assets/HI2.png";
 import { useState, useEffect } from 'react';
-import axios from "../helper/config";
+// import axios from "../helper/config";
+import axios from "axios";
 const Sidenavbar = () => {
 
 
@@ -8,11 +9,13 @@ const Sidenavbar = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("/login");
+      const res = await axios.get("http://localhost:7002/userProfile", {
+        withCredentials: true
+      });
       console.log(res.data);
-      setRes(res.data);
-
-    } catch (err) {
+      setRes(res.data); 
+ 
+    } catch (err) {    
       console.error("Error fetching data:", err.message);
     }
   };

@@ -22,7 +22,7 @@ const Sidebar = () => {
 
     const logout = async () => {
       try {
-        const res = await axios.post("http://localhost:7002/users/logout");
+        const res = await axios.post("http://localhost:7000/logout");
         console.log(res.data);
         navigate("/");
   

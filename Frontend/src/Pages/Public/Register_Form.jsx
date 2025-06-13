@@ -81,6 +81,7 @@ const Register_Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(user);
     // if (isFormValid()) {
     //     // Dispatch(registerAPI(user));
     //     // navigate("/");
@@ -96,12 +97,12 @@ const Register_Form = () => {
     // }
 
     try {
-      const username = user.name;
+      const name = user.name;
       const email = user.email;
       const password = user.firstpassword;
       
-      const response = await axios.post("http://localhost:7002/users/signup", {
-        username,
+      const response = await axios.post("http://localhost:7000/register", {
+        name,
         email,
         password,
       });
@@ -111,14 +112,12 @@ const Register_Form = () => {
       // Optionally reset form:
       setUser({ name: "", email: "", firstpassword: "", secondPassword: "" });
       toast.success("Registration successful!");
-      navigate("/login");
+      navigate("/user/adminpage");
       
     } catch (err) {
       // setError(err.response.data);
       console.log("error", err.massage);
-    } 
-
-      
+    }   
     }
           
   

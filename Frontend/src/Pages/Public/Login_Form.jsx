@@ -74,15 +74,15 @@ const Login_Form = () => {
     try {
       const email = user.email;
       const password = user.password;
-      const res = await axios.post("http://localhost:7002/users/login", {
+      const res = await axios.post("http://localhost:7000/login", {
         email,
-        password,
+        password, 
       });
       console.log("response", res.data);
       toast.success("You've been successfully loggedin...");
       navigate("/user/adminpage");
     } catch (err) {
-      console.error("Error fetching data:", err.message);
+      console.error("Error fetching data:");
     }
   };
 

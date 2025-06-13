@@ -2,7 +2,7 @@
 // import { Button } from "@/components/ui/button";
 // import avatar from "../../assets/profile.png";
 // import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
+import { useState, useEffect } from "react";
 // import { getUserDetails } from "@/helper/API/user";
 import { useNavigate } from "react-router-dom";
 // import { toast, ToastContainer } from "react-toastify";
@@ -12,14 +12,28 @@ const Profile = () => {
   const navigate = useNavigate();
   // const location = useLocation();
   // const { user } = useSelector((state) => state.user);
-  // useEffect(() => {
-  //   if (location?.state?.message) {
-  //     toast.success(location.state.message);
-  //   }
-  //   if (!user.firstName) {
-  //     dispatch(getUserDetails());
-  //   }
-  // }, [user, location]);
+  // const user = JSON.parse(localStorage.getItem("user"))
+  const [userDetails, setUserDetails] = useState({});
+  useEffect(() => {
+    getUserDetails();
+
+  }, []);
+  const getUserDetails = async function ( ) {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const { user_id } = jwtDecode(token);
+      const response = await axios.get(`http://localhost:7002/details/${user_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Set the authorization bearer token
+        },
+      });
+      setUserDetails(response?.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   const updateHandler = () => {
     navigate("/user/profile/update");
@@ -47,7 +61,7 @@ const Profile = () => {
           <div className="w-full h-10 flex items-center justify-between py-1">
             <span className="text-lg font-alice font-bold">First Name</span>
             <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm">
-              {/* {user?.firstName} */}
+              {userDetails?.name}
             </span>
           </div>
           <div className="w-full h-10 flex items-center justify-between py-1">
