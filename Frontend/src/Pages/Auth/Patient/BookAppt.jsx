@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
-const DoctorsRecord = () => {
+const BookAppt = () => {
   const [book , setBook] = useState([]);
 
   const items = [
@@ -78,20 +78,20 @@ const DoctorsRecord = () => {
 
   console.log(typeof book);
 
-//   const handleBooking = (id) => {
-//     // if (!book.includes(id)) {
-//     //   setBook([...book, id]);
-//     // }
+  const handleBooking = (id) => {
+    // if (!book.includes(id)) {
+    //   setBook([...book, id]);
+    // }
 
-//     if (book.includes(id)) {
-//       // Remove from booked
-//       setBook(book.filter(itemId => itemId !== id));
-//     } else {
-//       // Add to booked
-//       setBook([...book, id]);
-//       toast.success("Booked successfully...");
-//     }
-//   };
+    if (book.includes(id)) {
+      // Remove from booked
+      setBook(book.filter(itemId => itemId !== id));
+    } else {
+      // Add to booked
+      setBook([...book, id]);
+      toast.success("Booked successfully...");
+    }
+  };
 
   const imageUrl =
     "https://plus.unsplash.com/premium_photo-1681843126728-04eab730febe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -124,7 +124,7 @@ const DoctorsRecord = () => {
                 <h1>{item.attended}</h1>
                 <h1>{item.specialization}</h1>
                 <h1>{item.status}</h1>
-                {/* <h1 className="px-5 py-2 rounded-md bg-[#65adff] text-white flex justify-center items-center" style={{ backgroundColor: book.includes(item.id) ? 'red' : '#65adff' }} onClick={() => handleBooking(item.id)}>{book.includes(item.id) ? 'Booked' : 'Book'}</h1> */}
+                <h1 className="px-5 py-2 rounded-md bg-[#65adff] text-white flex justify-center items-center" style={{ backgroundColor: book.includes(item.id) ? 'red' : '#65adff' }} onClick={() => handleBooking(item.id)}>{book.includes(item.id) ? 'Booked' : 'Book'}</h1>
               </div>
             ))
           }
@@ -137,4 +137,4 @@ const DoctorsRecord = () => {
   );
 };
 
-export default DoctorsRecord;
+export default BookAppt;

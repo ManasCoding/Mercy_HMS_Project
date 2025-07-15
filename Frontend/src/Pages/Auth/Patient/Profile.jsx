@@ -1,43 +1,53 @@
-// import React from "react";
-// import { Button } from "@/components/ui/button";
-// import avatar from "../../assets/profile.png";
-// import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { useState, useEffect } from "react";
-// import { getUserDetails } from "@/helper/API/user";
 import { useNavigate } from "react-router-dom";
-// import { toast, ToastContainer } from "react-toastify";
-
+import axios from "axios";
 const Profile = () => {
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const { user } = useSelector((state) => state.user);
-  // const user = JSON.parse(localStorage.getItem("user"))
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [lastName, setLastName] = useState("");
   useEffect(() => {
     getUserDetails();
-
   }, []);
   const getUserDetails = async function ( ) {
     try {
-      const token = JSON.parse(localStorage.getItem("token"));
-      const { user_id } = jwtDecode(token);
-      const response = await axios.get(`http://localhost:7002/details/${user_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Set the authorization bearer token
-        },
-      });
-      setUserDetails(response?.data);
-      return response?.data;
+      const response = await axios.get("http://localhost:7000/userProfile");
+      console.log(response.data);
+      const fullName = response.data.name;
+      const parts = fullName.trim().split(" ");
+
+      let firstName = "";
+      if (parts.length > 0) {
+        firstName = parts[0]; // get the first element
+      }
+      console.log(firstName);
+
+      let middleName = "";
+      if (parts.length > 2) {
+        middleName = parts.slice(1, -1).join(" "); // handles multiple middle names
+      }
+      console.log(middleName);
+
+      let lastName = "";
+      if (parts.length > 1) {
+        lastName = parts[parts.length - 1]; // get the last element
+      }
+      console.log(lastName);
+      setUserDetails(response.data);
+      setFirstName(firstName);
+      setMiddleName(middleName);
+      setLastName(lastName);
     } catch (error) {
       console.log(error);
     }
   }
 
 
-  const updateHandler = () => {
-    navigate("/user/profile/update");
-  };
+  // const updateHandler = () => {
+  //   navigate("/user/profile/update");
+  // };
 
   const imageUrl =
     "https://plus.unsplash.com/premium_photo-1681843126728-04eab730febe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -60,20 +70,20 @@ const Profile = () => {
           </div>
           <div className="w-full h-10 flex items-center justify-between py-1">
             <span className="text-lg font-alice font-bold">First Name</span>
-            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm">
-              {userDetails?.name}
+            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm px-2">
+              {firstName}
             </span>
           </div>
           <div className="w-full h-10 flex items-center justify-between py-1">
             <span className="text-lg font-alice font-bold">Middle Name</span>
-            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm">
-              {/* {user?.middleName} */}
+            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm px-2">
+              {middleName}
             </span>
           </div>
           <div className="w-full h-10 flex items-center justify-between py-1">
             <span className="text-lg font-alice font-bold">Last Name</span>
-            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm">
-              {/* {user?.lastName} */}
+            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm px-2">
+              {lastName}
             </span>
           </div>
           <div className="w-full h-10 flex items-center justify-between py-1">
@@ -82,21 +92,16 @@ const Profile = () => {
               {/* {user?.gender} */}
             </span>
           </div>
-          {/* {user.usertype == "Admin" || user.usertype == "Doctor" ? ( */}
-            <div className="w-full h-10 flex items-center justify-between py-1">
-              <span className="text-lg font-alice font-bold">Role</span>
-              <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm">
-                {/* {user?.usertype === "Admin" ? user?.usertype : user?.role} */}
-              </span>
-            </div>
-          {/* ) : (
-            <></>
-          )} */}
+          <div className="w-full h-10 flex items-center justify-between py-1">
+            <span className="text-lg font-alice font-bold">Role</span>
+            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm">
+            </span>
+          </div>
 
           <div className="w-full h-10 flex items-center justify-between py-1">
             <span className="text-lg font-alice font-bold">Email</span>
-            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm">
-              {/* {user?.email} */}
+            <span className="border-[3px] border-slate-400 h-full w-[70%] bg-[#d0cdcdb6] rounded-sm px-2">
+              {userDetails?.email}
             </span>
           </div>
           <div className="w-full h-10 flex items-center justify-between py-1">
@@ -112,7 +117,7 @@ const Profile = () => {
             </span>
           </div>
           <div className="w-full h-10 flex items-center justify-center py-1 mt-2">
-            <button onClick={updateHandler}>Edit</button>
+            <button>Edit</button>
           </div>
         </div>
       </div>

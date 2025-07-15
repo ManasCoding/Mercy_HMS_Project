@@ -99,11 +99,13 @@ const Register_Form = () => {
     try {
       const name = user.name;
       const email = user.email;
+      const pin = user.pin;
       const password = user.firstpassword;
       
       const response = await axios.post("http://localhost:7000/register", {
         name,
         email,
+        pin,
         password,
       });
 
@@ -133,7 +135,7 @@ const Register_Form = () => {
       ></div>
       <form
         onSubmit={handleSubmit} 
-        className="relative z-10 shadow-lg shadow-[#005CC8] w-1/4 border-[#005CC8] border-4 rounded-md mx-auto  px-2 py-5  "
+        className="relative z-10 shadow-lg shadow-[#005CC8] w-1/4 border-[#005CC8] border-4 rounded-md mx-auto  px-2 py-4 mt-5"
       >
         <div className="w-full flex justify-center">
           <h1 className="shadow-lg shadow-[#005CC8] text-xl font-bold text-black border-4 border-[#3c97ff] bg-[#005CC8] px-2 py-1 rounded-full text-white hover:text-black">
@@ -225,7 +227,7 @@ const Register_Form = () => {
           </div>
         </div>
         <div className="flex items-center justify-center mt-4">
-          <button type="submit" className="text-white active:scale-110 rounded-lg hover:bg-white hover:text-black px-3 py-1 border-2 border-secondary text-xl font-bold">Register</button>
+          <button type="submit" className="text-gray-900 active:scale-110 rounded-lg bg-blue-500 hover:bg-white hover:text-black px-3 py-1 border-2 border-secondary text-xl font-bold">Register</button>
         </div>
       </form>
       <Link
@@ -234,7 +236,6 @@ const Register_Form = () => {
       >
         Already have an account ? Login then...
       </Link>
-      {/* <ToastContainer /> */}
     </div>
     </div>
   );

@@ -2,21 +2,16 @@
 import { ImEye } from "react-icons/im";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { useState } from "react";
-// import { toast, ToastContainer } from "react-toastify";
-// import { Button } from "@/components/ui/button";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import axios from "axios";
 // import { changeLoggedOutUserPassword, mailerAPI } from "@/helper/API/user";
 // import { jwtDecode } from "jwt-decode";
 
 const ChangePassword = () => {
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const [password, setpassword] = useState({
-  //   newPassword1: "",
-  //   newPassword2: "",
-  // });
+  const [password, setpassword] = useState({
+    newPassword: "",
+    oldPassword: "",
+  });
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   // useEffect(() => {
@@ -55,77 +50,42 @@ const ChangePassword = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  // const inputChangeHandler = (e) => {
-  //   setpassword({ ...password, [e.target.name]: e.target.value });
-  // };
+  const inputChangeHandler = (e) => {
+    setpassword({ ...password, [e.target.name]: e.target.value });
+  };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     if (isFormValid()) {
-  //       const response = await dispatch(
-  //         changeLoggedOutUserPassword({ newPassword: password?.newPassword1 })
-  //       ).unwrap();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(password);   
+    try {
+      const oldPassword = password.oldPassword;
+      const newPassword = password.newPassword;
+      const response = await axios.post("http://localhost:7000/updatepassword", {
+        oldPassword,
+        newPassword, 
+      });
+      console.log("response", response.data);
+      toast.success("Password successfully updated...");
+      navigate("/user/adminpage");
 
-  //       if (response) {
-  //         const token = JSON.parse(localStorage.getItem("token"));
-  //         const decode = await jwtDecode(token);
-  //         if (token && decode) {
-  //           const mailerResponse = await dispatch(
-  //             mailerAPI({
-  //               userName: decode?.userName?.split(" ")[0],
-  //               userEmail: decode?.userEmail,
-  //               text: `We wanted to let you know that your password for your account on HMS_Mercy was successfully changed.
-    
-  //   If you made this change, no further action is required. Your updated password is now active, and you can use it the next time you log in.
-    
-  //   If you did not request this change, please contact us immediately at this email. Our team will help secure your account and assist with resetting your password.
-    
-  //   For the security of your account, we recommend:
-    
-  //   Choosing a strong, unique password,
-  //   Not sharing your password with anyone,
-    
-  //   Thank you for being part of HMS_Mercy.
-    
-  //   Best regards,
-  //   HMS_Mercy`,
-  //               subject: "Your Password Has Been Successfully Changed...",
-  //             })
-  //           ).unwrap();
-
-  //           if (mailerResponse) {
-  //             toast.success("Password changed successfully...");
-  //             localStorage.removeItem("token");
-  //             navigate("/login", {
-  //               state: {
-  //                 message: "Password updated successfully...",
-  //               },
-  //             });
-  //           }
-  //         }
-  //         toast.success("Password changed successfully");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     toast.error(error.message);
-  //   }
-  // };
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
 
   const imageUrl =
     "https://img.freepik.com/premium-photo/hospital-hallway-unfocused-background_786878-6945.jpg?size=626&ext=jpg&ga=GA1.1.1289161518.1725302723&semt=ais_hybrid";
 
   return (
     <div className="relative w-full h-[88%] flex flex-col items-center justify-center">
-      {/* <ToastContainer /> */}
       <div
         className="absolute inset-0 bg-cover bg-center filter blur-sm"
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
 
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="relative z-10 shadow-lg shadow-[#005CC8] w-1/4 border-[#005CC8] border-4 rounded-md mx-auto px-2 py-5 "
       >
         <div className="w-full flex justify-center">
@@ -140,10 +100,10 @@ const ChangePassword = () => {
           <div className="relative flex">
             <input
               type={passwordVisible ? "text" : "password"}
-              placeholder="Enter your new password..."
-              name="newPassword1"
-              // value={password?.newPassword1}
-              // onChange={inputChangeHandler}
+              placeholder="Enter your old password..."
+              name="oldPassword"
+              value={password?.oldPassword}
+              onChange={inputChangeHandler}
               className="w-full bg-[#0077ff94] px-2 font-semibold placeholder-[#005CC8] text-white focus:outline-none"
             />
             <div
@@ -161,10 +121,10 @@ const ChangePassword = () => {
           <div className="relative flex">
             <input
               type={passwordVisible ? "text" : "password"}
-              placeholder="Enter password again..."
-              name="newPassword2"
-              // value={password?.newPassword2}
-              // onChange={inputChangeHandler}
+              placeholder="Enter your new password"
+              name="newPassword"
+              value={password?.newPassword}
+              onChange={inputChangeHandler}
               className="w-full bg-[#0077ff94] px-2 font-semibold placeholder-[#005CC8] text-white focus:outline-none"
             />
             <div

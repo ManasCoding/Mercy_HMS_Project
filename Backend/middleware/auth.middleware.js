@@ -4,10 +4,12 @@ import jsonwebtoken from "jsonwebtoken";
 
 const authenticate = asyncHandler(async (req, res, next) => {
     const { auth_token } = req.cookies;
+    console.log(auth_token);
     if (!auth_token) {
-        return res.status(401).json({ success: false, message: "Unauthorized , please login" });
+        return res.status(401).json({ success: false, message: "Unauthorized, please login" });
     }
     const token = JSON.parse(auth_token);
+    console.log(token);
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
     if (!decoded) {
         return res.status(401).json({ success: false, message: "Unauthorized token" });

@@ -10,6 +10,7 @@ import Adminpage from '../Pages/Auth/Patient/Adminpage'
 import Profilepage from '../Pages/Auth/Patient/Profilepage'
 import Passwordpage from '../Pages/Auth/Patient/Passwordpage'
 import DoctorsRecordpage from '../Pages/Auth/Patient/DoctorsRecordpage'
+import BookApptpage from '../Pages/Auth/Patient/BookApptpage'
 import Outbreakpage from '../Pages/Auth/Patient/Outbreakpage'
 import PatientRecordpage from '../Pages/Auth/Patient/PatientRecordpage'
 const Router = () => {
@@ -31,6 +32,7 @@ const Router = () => {
             <Route path="/user/profile/update" element={<Profilepage />}/>
             <Route path="/user/password/update" element={<Passwordpage />}/>
             <Route path="/user/doctors/record" element={<DoctorsRecordpage />}/>
+            <Route path="/user/book/appointment" element={<BookApptpage />}/>
             <Route path="/user/likely/outbreaks" element={<Outbreakpage />}/>
             <Route path="/user/patients/record" element={<PatientRecordpage />}/>
             

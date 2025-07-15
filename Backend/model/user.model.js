@@ -1,6 +1,10 @@
 import mongoose, { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 const userSchema = new Schema({
+  pin: { 
+    type: Number, 
+    required: true, 
+    unique: true },
   name: { 
     type: String,
     required: true ,

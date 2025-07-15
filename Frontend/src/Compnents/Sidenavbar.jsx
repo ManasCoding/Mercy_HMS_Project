@@ -9,11 +9,12 @@ const Sidenavbar = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:7002/userProfile", {
+      const res = await axios.get("http://localhost:7000/userProfile", {
         withCredentials: true
       });
-      console.log(res.data);
-      setRes(res.data); 
+      // console.log(res.data);
+      setRes(res.data.name);
+      // setRes(JSON.stringify(res.data.name)); 
  
     } catch (err) {    
       console.error("Error fetching data:", err.message);
@@ -31,7 +32,8 @@ useEffect(() => {
         <div className=' w-full h-full flex items-start items-center'>
             <div><img src={image} alt="" className='w-[35%] h-[20%] rounded-full bg-cover bg-center bg-transparent'/></div>
             {/* <div className='text-6xl h-full'>|</div> */}
-            <div>{res}</div>
+            {/* <div>{res}</div> */}
+            <div>Project is under development</div>
         </div>
     </div>
   )

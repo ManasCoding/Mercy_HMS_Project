@@ -33,12 +33,9 @@ const Dashboard = () => {
           style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
         <div className="relative z-10 grid auto-rows-min gap-4 md:grid-cols-3 w-full">
-          {/* <Skeleton className="aspect-video rounded-xl" />{" "} */}
-          {/* {user.usertype == "Admin" ? ( */}
             <div className="bg-[#ffffff88] aspect-video border-2 border-[#0077ff94] rounded-lg flex flex-col items-center justify-around hover:p-1 hover:bg-[#ffffffac]">
               <h1 className="font-bold text-[#0077ff94]">Doctors</h1>
               <div className="text-4xl text-red-600 font-bold">
-                {/* {user?.doctorsNum} */}
               </div>
               <NavLink
                 to={"/user/doctors/record"}
@@ -47,15 +44,9 @@ const Dashboard = () => {
                 View ➡️
               </NavLink>
             </div>
-          {/* ) : (
-            <></>
-          )} */}
-
-          {/* {user.usertype == "Doctor" || user.usertype == "Admin" ? ( */}
             <div className="bg-[#ffffff88] aspect-video border-2 border-[#0077ff94] rounded-lg flex flex-col items-center justify-around hover:p-1 hover:bg-[#ffffffac]">
               <h1 className="font-bold text-[#0077ff94]">Patients</h1>
               <div className="text-4xl text-red-600 font-bold">
-                {/* {user?.patientsNum || 0} */}
               </div>
               <NavLink
                 to={"/user/patients/record"}
@@ -64,14 +55,9 @@ const Dashboard = () => {
                 View ➡️
               </NavLink>
             </div>
-          {/* ) : (
-            <></>
-          )} */}
-
           <div className="bg-[#ffffff88] aspect-video border-2 border-[#0077ff94] rounded-lg flex flex-col items-center justify-around hover:p-1 hover:bg-[#ffffffac]">
             <h1 className="font-bold text-[#0077ff94]">Appointments</h1>
             <div className="text-4xl text-red-600 font-bold">
-              {/* {user?.appointmentsNum || 0} */}
             </div>
             <NavLink
               to={"/user/appointments"}
@@ -80,12 +66,9 @@ const Dashboard = () => {
               View ➡️
             </NavLink>
           </div>
-
-          {/* {user.usertype == "Admin" || user.usertype == "Doctor" ? ( */}
             <div className="bg-[#ffffff88] aspect-video border-2 border-[#0077ff94] rounded-lg flex flex-col items-center justify-around hover:p-1 hover:bg-[#ffffffac]">
               <h1 className="font-bold text-[#0077ff94]">Outbreaks</h1>
               <div className="text-4xl text-red-600 font-bold">
-                {/* {user?.outbreaksNum || 0} */}
               </div>
               <NavLink
                 to={"/user/likely/outbreaks"}
@@ -94,10 +77,6 @@ const Dashboard = () => {
                 View ➡️
               </NavLink>
             </div>
-          {/* ) : (
-            <></>
-          )} */}
-
           <div className="bg-[#ffffff88] aspect-video border-2 border-[#0077ff94] rounded-lg flex flex-col items-center justify-around hover:p-1 hover:bg-[#ffffffac]">
             <h1 className="font-bold text-[#0077ff94]">Profile Updation</h1>
             <div className="relative text-4xl text-red-600 font-bold">
@@ -134,23 +113,17 @@ const Dashboard = () => {
               View ➡️
             </NavLink>
           </div>
-
-          {/* {user.usertype == "Patient" ? ( */}
             <div className="bg-[#ffffff88] aspect-video border-2 border-[#0077ff94] rounded-lg flex flex-col items-center justify-around hover:p-1 hover:bg-[#ffffffac]">
               <h1 className="font-bold text-[#0077ff94]">Book Appointment</h1>
               <div className="text-4xl text-red-600 font-bold">
-                {/* {user?.outbreaksNum || 0} */}
               </div>
               <NavLink
-                to={"/user/book/appt"}
+                to={"/user/book/appointment"}
                 className="cursor-pointer hover:underline decoration-2 decoration-blue-500 hover:underline-offset-4 hover:underline-blue"
               >
                 View ➡️
               </NavLink>
             </div>
-          {/* ) : (
-            <></>
-          )} */}
         </div>
       </div>
   );
