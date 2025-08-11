@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:7000/userProfile");
+        const res = await axios.get("http://localhost:7000/api/Profile", { withCredentials: true });
         const firstName = res.data.name.split(" ")[0];
         // console.log(res.data);
         setItems(firstName);
@@ -21,15 +21,15 @@ const Sidebar = () => {
     };
 
     const logout = async () => {
-      // try {
-      //   const res = await axios.post("http://localhost:7000/logout");
-      //   console.log(res.data);
-      //   navigate("/");
+      try {
+        console.log("logout");
+        const res = await axios.post("http://localhost:7000/api/logout", { withCredentials: true });
+        console.log(res.data);
+        navigate("/");
   
-      // } catch (err) {
-      //   console.error("Error fetching data:", err.message);
-      // }
-      navigate("/");
+      } catch (err) {
+        console.error("Error fetching data:", err.message);
+      }
     };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Sidebar = () => {
             <Link to="/user/patients/record"><div className='hover:bg-[#C5E0FF] text-lg px-2 rounded-md'>Patients</div></Link>
             <Link to="/user/likely/outbreaks"><div className='hover:bg-[#C5E0FF] text-lg px-2 rounded-md'>Appointments</div></Link>
             <Link to="/user/likely/outbreaks"><div className='hover:bg-[#C5E0FF] text-lg px-2 rounded-md'>OutBreaks</div></Link>
-            <Link to="/user/profile/update"><div className='hover:bg-[#C5E0FF] text-lg px-2 rounded-md'>Profile</div></Link>
+            <Link to="/user/profile"><div className='hover:bg-[#C5E0FF] text-lg px-2 rounded-md'>Profile</div></Link>
             <Link to="/user/password/update"><div className='hover:bg-[#C5E0FF] text-lg px-2 rounded-md'>Cange Password</div></Link>
             <Link to="/user/book/appointment"><div className='hover:bg-[#C5E0FF] text-lg px-2 rounded-md'>BookAppointment</div></Link>
           </div>

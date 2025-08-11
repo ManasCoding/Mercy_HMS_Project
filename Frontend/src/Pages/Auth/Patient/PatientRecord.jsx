@@ -8,7 +8,7 @@ const PatientRecord = () => {
 
   const getUsers = async function () {
     try {
-      const response = await axios.get("http://localhost:7000/allUsers");
+      const response = await axios.get("http://localhost:7000/api/allUsers", { withCredentials: true });
       const allData = response.data;
       console.log(allData);
       setUsers(allData);

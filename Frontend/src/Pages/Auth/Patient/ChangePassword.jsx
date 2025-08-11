@@ -4,10 +4,14 @@ import { RiEyeCloseFill } from "react-icons/ri";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import { changeLoggedOutUserPassword, mailerAPI } from "@/helper/API/user";
 // import { jwtDecode } from "jwt-decode";
 
 const ChangePassword = () => {
+  const navigate = useNavigate();
+  
+
   const [password, setpassword] = useState({
     newPassword: "",
     oldPassword: "",
@@ -60,10 +64,10 @@ const ChangePassword = () => {
     try {
       const oldPassword = password.oldPassword;
       const newPassword = password.newPassword;
-      const response = await axios.post("http://localhost:7000/updatepassword", {
+      const response = await axios.post("http://localhost:7000/api/updatepassword", {
         oldPassword,
         newPassword, 
-      });
+      }, { withCredentials: true });
       console.log("response", response.data);
       toast.success("Password successfully updated...");
       navigate("/user/adminpage");

@@ -13,7 +13,7 @@ const Profile = () => {
   }, []);
   const getUserDetails = async function ( ) {
     try {
-      const response = await axios.get("http://localhost:7000/userProfile");
+      const response = await axios.get("http://localhost:7000/api/Profile", { withCredentials: true });
       console.log(response.data);
       const fullName = response.data.name;
       const parts = fullName.trim().split(" ");

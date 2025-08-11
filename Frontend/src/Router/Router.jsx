@@ -29,7 +29,7 @@ const Router = () => {
 
 
             <Route path="/user/adminpage" element={<Adminpage />}/>
-            <Route path="/user/profile/update" element={<Profilepage />}/>
+            <Route path="/user/profile" element={<Profilepage />}/>
             <Route path="/user/password/update" element={<Passwordpage />}/>
             <Route path="/user/doctors/record" element={<DoctorsRecordpage />}/>
             <Route path="/user/book/appointment" element={<BookApptpage />}/>

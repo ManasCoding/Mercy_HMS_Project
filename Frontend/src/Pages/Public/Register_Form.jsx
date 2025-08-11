@@ -83,7 +83,6 @@ const Register_Form = () => {
     e.preventDefault();
     console.log(user);
     // if (isFormValid()) {
-    //     // Dispatch(registerAPI(user));
     //     // navigate("/");
     //     console.log(user);
     //   }
@@ -102,16 +101,14 @@ const Register_Form = () => {
       const pin = user.pin;
       const password = user.firstpassword;
       
-      const response = await axios.post("http://localhost:7000/register", {
+      const response = await axios.post("http://localhost:7000/api/register", {
         name,
         email,
         pin,
         password,
-      });
+      }, { withCredentials: true });
 
-      // setSuccess(true);
       console.log("Registered:", response.data);
-      // Optionally reset form:
       setUser({ name: "", email: "", firstpassword: "", secondPassword: "" });
       toast.success("Registration successful!");
       navigate("/user/adminpage");
@@ -227,7 +224,7 @@ const Register_Form = () => {
           </div>
         </div>
         <div className="flex items-center justify-center mt-4">
-          <button type="submit" className="text-gray-900 active:scale-110 rounded-lg bg-blue-500 hover:bg-white hover:text-black px-3 py-1 border-2 border-secondary text-xl font-bold">Register</button>
+          <button type="submit" className="hover:bg-white hover:border-secondary active:scale-110 hover:text-black rounded-3xl px-5 py-1 border-2 bg-secondary text-gray-500 text-xl font-bold">Register</button>
         </div>
       </form>
       <Link

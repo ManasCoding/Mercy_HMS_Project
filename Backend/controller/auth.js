@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import User from "../model/user.model.js";
 import { hashPassword } from "../utils/bcrypt.js";
 import { generateToken } from "../utils/jwt.js";
+import jsonwebtoken from "jsonwebtoken";
 
 const register = asyncHandler(async (req, res) => {
   const { name, email, pin, password } = req.body;
@@ -12,7 +13,7 @@ const register = asyncHandler(async (req, res) => {
   }
 
   try {
-    const findUser = await User.findOne({ email: email });
+    const findUser = await User.findOne({ email });
     if (findUser) {
       res.status(400).json({ success: false, message: "User already exists" });
     }
@@ -24,16 +25,10 @@ const register = asyncHandler(async (req, res) => {
         pin: pin,
         password: passwordHash,
       });
-      const token = generateToken({ id: newUser._id });
+      const token = generateToken({ email: email, userid: newUser._id });
 
       res
-        .cookie(
-          "auth_token",
-          JSON.stringify(token, {
-            maxAge: 5 * 24 * 60 * 60 * 1000,
-            samesite: "none",
-          })
-        )
+        .cookie("auth_token", token )
         .status(201)
         .json({
           success: true,
@@ -70,13 +65,11 @@ const login = asyncHandler(async (req, res) => {
       return res.status(400).json({ success: false, message: "Invalid password" });
     }
     try {
-      const token = generateToken({ id: findUser._id });
+      const token = generateToken({ email: email, userid: findUser._id });
       console.log(token);
       return res
         .cookie(
-          "auth_token",
-          JSON.stringify(token, {
-            maxAge: 5 * 24 * 60 * 60 * 1000, samesite: "none",}))
+          "auth_token", token)
         .status(200)
         .json({ success: true, message: "User logged in successfully" });
     } catch (error) {
@@ -88,22 +81,60 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const logout = asyncHandler(async (req, res) => {
-  return res
-    .clearCookie("auth_token", {path:"/"})
+  console.log("logout");
+  return res.clearCookie("auth_token")
     .status(200)
-    .json({ success: true, message: "User logged out successfully" });
+    .json({ success: true, message: "User logged out successfully" }).redirect("/");
 });
 
+
+function isLoggedIn(req, res, next) {
+    try {
+        const token = req.cookies.auth_token;
+        console.log(token);
+        if (!token) {
+          console.log("hello plz login");
+            res.status(401);
+            return res.send("Please login first");
+        } else {
+            const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+            console.log(decoded);
+            req.user = decoded;
+            console.log("hello");
+            console.log(token);
+            next();
+        }
+    }
+    catch (err) {
+        return res.status(401).send("Please login first error");
+        // return res.redirect("/");
+    }
+}  
+
+// app.get("/profile", isLoggedIn, async function (req, res) {
+//     console.log(req.user);
+//     let user = await usermodel.findOne({ email: req.user.email }).populate("post");
+//     console.log(user);
+//     // res.render("profile", { user });
+//     res.send(user);
+// }); 
+
+
 const getUserData = asyncHandler(async (req, res) => {
-  const token = req.cookies.auth_token;
+  // const token = req.cookies.auth_token;
   // console.log(token);
-  const user = await User.findOne( req.params.id);
-  // console.log(user);
+  console.log("hello get user data");
+  console.log(req.user);
+  // const user = await User.findOne( req.params.id);
+  const user = await User.findOne({ email: req.user.email });
+  console.log(user);
   res.status(200).send(user);
 });
 
 
 const getAllUserData = asyncHandler(async (req, res) => {
+  console.log("hello get all user data give me all users");
+  console.log(req.user);
   const allUser = await User.find({});
   console.log(allUser);
   res.status(200).send(allUser);
@@ -113,7 +144,8 @@ const getAllUserData = asyncHandler(async (req, res) => {
 const updatePassword = async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body;
-    const id = req.params.id;
+    // const id = req.params.id;
+    const id = req.user;
     console.log(id);
 
     if (!id) {
@@ -127,7 +159,7 @@ const updatePassword = async (req, res) => {
       return res.status(404).send({ message: "New Password is required" });
     }
 
-    const storedUser = await User.findOne({ _id: id });
+    const storedUser = await User.findOne({ email: req.user.email });
 
     if (!storedUser) {
       return res.status(404).send({ message: "User not found!!!" });
@@ -135,7 +167,7 @@ const updatePassword = async (req, res) => {
     const passwordHash = await hashPassword(newPassword);
 
       await User.updateOne(
-        { _id: req.user.user_id },
+        { email: req.user.email },
         { password: passwordHash }
       );
       return res
@@ -149,4 +181,4 @@ const updatePassword = async (req, res) => {
 
 
 
-export { register, login, logout, getUserData, getAllUserData, updatePassword };
+export { register, login, logout, getUserData, getAllUserData, updatePassword, isLoggedIn };

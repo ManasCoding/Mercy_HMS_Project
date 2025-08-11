@@ -74,10 +74,10 @@ const Login_Form = () => {
     try {
       const email = user.email;
       const password = user.password;
-      const res = await axios.post("http://localhost:7000/login", {
+      const res = await axios.post("http://localhost:7000/api/login", {
         email,
         password, 
-      });
+      }, { withCredentials: true });
       console.log("response", res.data);
       toast.success("You've been successfully loggedin...");
       navigate("/user/adminpage");
