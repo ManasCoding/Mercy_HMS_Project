@@ -3,6 +3,10 @@ import User from "../model/user.model.js";
 import { hashPassword } from "../utils/bcrypt.js";
 import { generateToken } from "../utils/jwt.js";
 import jsonwebtoken from "jsonwebtoken";
+// import uploads from "../utils/multer.js";
+import multer from "multer";
+import crypto from "crypto";
+import path from "path";
 
 const register = asyncHandler(async (req, res) => {
   const { name, email, pin, password } = req.body;
@@ -66,7 +70,7 @@ const login = asyncHandler(async (req, res) => {
     }
     try {
       const token = generateToken({ email: email, userid: findUser._id });
-      console.log(token);
+      // console.log(token);
       return res
         .cookie(
           "auth_token", token)
@@ -82,26 +86,58 @@ const login = asyncHandler(async (req, res) => {
 
 const logout = asyncHandler(async (req, res) => {
   console.log("logout");
-  return res.clearCookie("auth_token")
-    .status(200)
-    .json({ success: true, message: "User logged out successfully" }).redirect("/");
+  res.clearCookie("auth_token");
+  return res.redirect("/");
 });
+
+
+
+const uploads = asyncHandler(async (req, res) => {
+  console.log(req.user);
+  console.log("bfskvbkearbferbvkjv");
+  console.log(req.file);
+  console.log(req.file.filename);
+  const user = await User.findOne({ email: req.user.email });
+  user.image = `/images/uploads/${req.file.filename}`;
+  console.log(user.image);
+  
+
+  await user.save();
+  res.status(200).json({ success: true, message: "Image uploaded successfully" });
+});
+
+const updateProfile = asyncHandler(async (req, res) => {
+  const { gender, date, phone, address } = req.body;
+  // console.log(req.body);
+  // console.log(req.user);
+  const user = await User.findOne({ email: req.user.email });
+  // console.log(user);
+  user.gender = gender;
+  user.date = date;
+  user.phone = phone;
+  user.address = address;
+  await user.save();
+  // console.log(user);
+  res.status(200).json({ success: true, message: "Profile updated successfully" });
+});
+
+
 
 
 function isLoggedIn(req, res, next) {
     try {
         const token = req.cookies.auth_token;
-        console.log(token);
+        // console.log(token);
         if (!token) {
-          console.log("hello plz login");
+          // console.log("hello plz login");
             res.status(401);
             return res.send("Please login first");
         } else {
             const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-            console.log(decoded);
+            // console.log(decoded);
             req.user = decoded;
-            console.log("hello");
-            console.log(token);
+            // console.log("hello");
+            // console.log(token);
             next();
         }
     }
@@ -111,32 +147,24 @@ function isLoggedIn(req, res, next) {
     }
 }  
 
-// app.get("/profile", isLoggedIn, async function (req, res) {
-//     console.log(req.user);
-//     let user = await usermodel.findOne({ email: req.user.email }).populate("post");
-//     console.log(user);
-//     // res.render("profile", { user });
-//     res.send(user);
-// }); 
-
-
 const getUserData = asyncHandler(async (req, res) => {
   // const token = req.cookies.auth_token;
   // console.log(token);
-  console.log("hello get user data");
-  console.log(req.user);
+  // console.log("hello get user data");
+  // console.log(req.user);
   // const user = await User.findOne( req.params.id);
   const user = await User.findOne({ email: req.user.email });
-  console.log(user);
+  // console.log(user);
   res.status(200).send(user);
 });
 
 
 const getAllUserData = asyncHandler(async (req, res) => {
-  console.log("hello get all user data give me all users");
-  console.log(req.user);
+  // console.log("hello get all user data give me all users");
+  // console.log(req.user);
   const allUser = await User.find({});
   console.log(allUser);
+  // console.log(allUser.date);
   res.status(200).send(allUser);
 });
 
@@ -146,7 +174,7 @@ const updatePassword = async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     // const id = req.params.id;
     const id = req.user;
-    console.log(id);
+    // console.log(id);
 
     if (!id) {
       return res.status(404).send({ message: "User Id not found" });
@@ -181,4 +209,4 @@ const updatePassword = async (req, res) => {
 
 
 
-export { register, login, logout, getUserData, getAllUserData, updatePassword, isLoggedIn };
+export { register, login, logout, getUserData, getAllUserData, updatePassword, isLoggedIn, updateProfile, uploads };

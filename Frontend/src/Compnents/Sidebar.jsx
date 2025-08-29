@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import image from "../assets/profile.png";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 const Sidebar = () => {
 
   const [items, setItems] = useState("");
+  const [profilePic, setProfilePic] = useState("");
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -14,6 +14,7 @@ const Sidebar = () => {
         const firstName = res.data.name.split(" ")[0];
         // console.log(res.data);
         setItems(firstName);
+        setProfilePic(res.data.image);
   
       } catch (err) {
         console.error("Error fetching data:", err.message);
@@ -42,7 +43,7 @@ const Sidebar = () => {
       <div className='w-full h-screen bg-[#65adff] flex flex-col justify-between'>
         <div className=' w-full flex flex-col items-start'>
           <div className=' w-full flex items-start gap-2 p-5'>
-            <div className='w-[30%] h-[30%] rounded-full'><img src={image} alt="" /></div>
+            <div className='w-[30%] h-[90%] rounded-full bg-cover bg-white'><img src={`http://localhost:7000${profilePic}`} alt="" /></div>
             <div className='flex flex-col'>
               <div>{items}</div>
               <div className='text-xs'>Patient</div>
@@ -64,7 +65,7 @@ const Sidebar = () => {
 
           
         </div>
-        <div className=' text-lg px-10 rounded-md mb-10'><button  onClick={logout} className='hover:bg-[#C5E0FF] text-lg rounded-md px-6'>logout</button></div>
+        <div className=' text-lg px-10 rounded-md mb-10'><button  onClick={logout} className="hover:bg-white hover:border-secondary active:scale-110 hover:text-black rounded-3xl px-5 py-1 border-2 bg-secondary text-white text-xl font-bold">logout</button></div>
       </div>
     </div>
   ) 

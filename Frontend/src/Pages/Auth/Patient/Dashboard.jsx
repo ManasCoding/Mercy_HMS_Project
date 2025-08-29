@@ -1,25 +1,27 @@
 // import React from 'react'
 import { FaCog } from "react-icons/fa";
 import { TbLockCog } from "react-icons/tb";
-
-// import avatar from "../../../assets/profile.png";
-// import { useEffect } from "react";
-// import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-// import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useState } from "react";
 
 const Dashboard = () => {
-  // const { user } = useSelector((state) => state.user);
 
-  // const location = useLocation();
+    const [profilePic, setProfilePic] = useState("");
+    useEffect(() => {
+      getUserDetails();
+    }, []);
+    const getUserDetails = async function ( ) {
+      try {
+        const response = await axios.get("http://localhost:7000/api/Profile", { withCredentials: true });
 
-  // useEffect(() => {
-  //   // Check if a message was passed via navigate
-  //   // console.log(user.usertype);
-  //   if (location?.state?.message) {
-  //     toast.success(location.state.message);
-  //   }
-  // }, [location]);
+        setProfilePic(response.data.image);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
 
   
 
@@ -60,7 +62,7 @@ const Dashboard = () => {
             <div className="text-4xl text-red-600 font-bold">
             </div>
             <NavLink
-              to={"/user/appointments"}
+              to={"/user/likely/outbreaks"}
               className="cursor-pointer hover:underline decoration-2 decoration-blue-500 hover:underline-offset-4 hover:underline-blue"
             >
               View ➡️
@@ -82,7 +84,7 @@ const Dashboard = () => {
             <div className="relative text-4xl text-red-600 font-bold">
               <span>
                 <img
-                  // src={user.profilePicture || avatar}
+                  src={`http://localhost:7000/${profilePic}`}
                   alt="profile Img"
                   className="border-2 border-gray-100 w-[80px] h-[80px] object-cover rounded-full shadow-lg cursor-pointer"
                 />
@@ -92,7 +94,7 @@ const Dashboard = () => {
               </span>
             </div>
             <NavLink
-              to={"/user/profile/update"}
+              to={"/user/profile"}
               className="cursor-pointer hover:underline decoration-2 decoration-blue-500 hover:underline-offset-4 hover:underline-blue"
             >
               View ➡️

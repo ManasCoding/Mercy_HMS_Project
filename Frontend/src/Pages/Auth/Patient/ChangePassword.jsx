@@ -94,7 +94,7 @@ const ChangePassword = () => {
       >
         <div className="w-full flex justify-center">
           <h1 className="shadow-lg shadow-[#005CC8] text-xl font-bold text-black border-4 border-[#3c97ff] bg-[#005CC8] px-2 py-1 rounded-full text-white hover:text-black">
-            Password_Change-Form
+            Password-Change-Form
           </h1>
         </div>
         <div className="input-container flex flex-col">
@@ -141,7 +141,7 @@ const ChangePassword = () => {
         </div>
 
         <div className="flex flex-col items-center justify-center mt-4">
-          <button>Submit</button>
+          <button className="hover:bg-white hover:border-secondary active:scale-110 hover:text-black rounded-3xl px-5 py-1 border-2 bg-secondary text-white text-xl font-bold">Submit</button>
         </div>
       </form>
     </div>

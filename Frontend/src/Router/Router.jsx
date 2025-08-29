@@ -8,6 +8,7 @@ import Contact from '../Pages/Public/Contact'
 import Username from '../Pages/Public/Username'
 import Adminpage from '../Pages/Auth/Patient/Adminpage'
 import Profilepage from '../Pages/Auth/Patient/Profilepage'
+import EditProfile from '../Pages/Auth/Patient/EditProfile'
 import Passwordpage from '../Pages/Auth/Patient/Passwordpage'
 import DoctorsRecordpage from '../Pages/Auth/Patient/DoctorsRecordpage'
 import BookApptpage from '../Pages/Auth/Patient/BookApptpage'
@@ -30,6 +31,7 @@ const Router = () => {
 
             <Route path="/user/adminpage" element={<Adminpage />}/>
             <Route path="/user/profile" element={<Profilepage />}/>
+            <Route path="/user/profile/update" element={<EditProfile />}/>
             <Route path="/user/password/update" element={<Passwordpage />}/>
             <Route path="/user/doctors/record" element={<DoctorsRecordpage />}/>
             <Route path="/user/book/appointment" element={<BookApptpage />}/>

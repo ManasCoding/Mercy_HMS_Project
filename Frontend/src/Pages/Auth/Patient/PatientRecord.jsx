@@ -1,10 +1,19 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios, { all } from 'axios'
 const PatientRecord = () => {
 
   const [users, setUsers] = useState([]);
   console.log(users);
+
+  const birthDate = new Date();
+  const today = new Date();
+
+  let years = today.getFullYear() - birthDate.getFullYear();
+  // const m = today.getMonth() - birthDate.getMonth();
+  // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+  //   years--;
+  // }
 
   const getUsers = async function () {
     try {
@@ -44,7 +53,7 @@ const PatientRecord = () => {
                 <h1>{item.name}</h1>
                 <h1>{item.email}</h1>
                 <h1>age</h1>
-                <h1>male</h1>
+                <h1>{item.gender}</h1>
               </div>
             ))
           }

@@ -13,16 +13,38 @@ const userSchema = new Schema({
     maxLenght:50,
     minLenght:3
   },
-  email: { type: String, required: true, unique: true,
+  email: { 
+    type: String, 
+    required: true, 
+    unique: true,
     trim: true,
     lowercase: true,
     maxLenght:50,
-    minLenght:3},
-  password: { type: String, required: true },
-  profileImgUrl: { type: String ,required: false }
+    minLenght:3
+  },
+  password: { 
+    type: String, 
+    required: true 
+  },
+  gender: { 
+    type: String, 
+  },
+  date: { 
+    type: Date, 
+  },
+  phone: { 
+    type: Number, 
+  },
+  address: { 
+    type: String, 
+  },
+  image: {
+        type: String,
+    },
 },{
     timestamps: true
 })
+
 
 userSchema.methods.checkPassword = async function (password) {
     return await bcrypt.compare(password, this.password);

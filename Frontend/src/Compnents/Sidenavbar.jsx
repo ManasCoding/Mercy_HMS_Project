@@ -14,7 +14,6 @@ const Sidenavbar = () => {
       });
       console.log(res.data);
       setRes(res.data.name);
-      // setRes(JSON.stringify(res.data.name)); 
  
     } catch (err) {    
       console.error("Error fetching data:", err.message);
