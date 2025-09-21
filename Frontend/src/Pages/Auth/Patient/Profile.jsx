@@ -14,7 +14,7 @@ const Profile = () => {
   }, []);
   const getUserDetails = async function ( ) {
     try {
-      const response = await axios.get("http://localhost:7000/api/Profile", { withCredentials: true });
+      const response = await axios.get("https://mercy-hms-backend.onrender.com/api/Profile", { withCredentials: true });
       console.log(response.data);
       const fullName = response.data.name;
       const parts = fullName.trim().split(" ");
@@ -64,7 +64,7 @@ const Profile = () => {
           <div className="w-full h-20 flex justify-center items-center">
             <span>
               <img
-                src={`https://mercy-hms-backend.onrender.com${profilePic}`}
+                src={`https://mercy-hms-backend.onrender.com/${profilePic}`}
                 alt="profile Img"
                 className="border-2 border-gray-100 w-[66px] h-[66px] object-cover rounded-full shadow-lg cursor-pointer"
               />
