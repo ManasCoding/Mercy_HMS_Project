@@ -32,7 +32,7 @@ const register = asyncHandler(async (req, res) => {
       const token = generateToken({ email: email, userid: newUser._id });
 
       res
-        .cookie("auth_token", token )
+        .cookie("auth_token", token, { httpOnly: true, sameSite: "none", secure: true })
         .status(201)
         .json({
           success: true,
@@ -73,7 +73,7 @@ const login = asyncHandler(async (req, res) => {
       // console.log(token);
       return res
         .cookie(
-          "auth_token", token)
+          "auth_token", token, { httpOnly: true, sameSite: "none", secure: true })
         .status(200)
         .json({ success: true, message: "User logged in successfully" });
     } catch (error) {
