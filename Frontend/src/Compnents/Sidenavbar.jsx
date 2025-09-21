@@ -9,7 +9,7 @@ const Sidenavbar = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:7000/api/Profile", {
+      const res = await axios.get("https://mercy-hms-backend.onrender.com/api/Profile", {
         withCredentials: true
       });
       console.log(res.data);

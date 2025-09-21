@@ -14,7 +14,7 @@ const Dashboard = () => {
     }, []);
     const getUserDetails = async function ( ) {
       try {
-        const response = await axios.get("http://localhost:7000/api/Profile", { withCredentials: true });
+        const response = await axios.get("https://mercy-hms-backend.onrender.com/api/Profile", { withCredentials: true });
 
         setProfilePic(response.data.image);
       } catch (error) {
@@ -84,7 +84,7 @@ const Dashboard = () => {
             <div className="relative text-4xl text-red-600 font-bold">
               <span>
                 <img
-                  src={`http://localhost:7000/${profilePic}`}
+                  src={`https://mercy-hms-backend.onrender.com/${profilePic}`}
                   alt="profile Img"
                   className="border-2 border-gray-100 w-[80px] h-[80px] object-cover rounded-full shadow-lg cursor-pointer"
                 />

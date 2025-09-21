@@ -100,7 +100,7 @@ const EditProfile = () => {
     try {
       const formData = new FormData();
       formData.append("image", userImage.image);
-      const ress = await axios.post("http://localhost:7000/api/upload", formData, { withCredentials: true });
+      const ress = await axios.post("https://mercy-hms-backend.onrender.com/api/upload", formData, { withCredentials: true });
       console.log("response", ress.data);
       toast.success("You've been successfully updated...");
       // navigate("/user/adminpage");
@@ -108,6 +108,7 @@ const EditProfile = () => {
       console.error("Error fetching data:");
     }
   };
+
 
   const imageUrl =
     "https://plus.unsplash.com/premium_photo-1681843126728-04eab730febe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";

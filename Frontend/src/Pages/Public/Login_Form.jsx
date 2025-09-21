@@ -74,7 +74,7 @@ const Login_Form = () => {
     try {
       const email = user.email;
       const password = user.password;
-      const res = await axios.post("http://localhost:7000/api/login", {
+      const res = await axios.post("https://mercy-hms-backend.onrender.com/api/login", {
         email,
         password, 
       }, { withCredentials: true });

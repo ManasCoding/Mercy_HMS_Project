@@ -101,7 +101,7 @@ const Register_Form = () => {
       const pin = user.pin;
       const password = user.firstpassword;
       
-      const response = await axios.post("http://localhost:7000/api/register", {
+      const response = await axios.post("https://mercy-hms-backend.onrender.com/api/register", {
         name,
         email,
         pin,

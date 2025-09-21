@@ -64,7 +64,7 @@ const Profile = () => {
           <div className="w-full h-20 flex justify-center items-center">
             <span>
               <img
-                src={`http://localhost:7000${profilePic}`}
+                src={`https://mercy-hms-backend.onrender.com${profilePic}`}
                 alt="profile Img"
                 className="border-2 border-gray-100 w-[66px] h-[66px] object-cover rounded-full shadow-lg cursor-pointer"
               />

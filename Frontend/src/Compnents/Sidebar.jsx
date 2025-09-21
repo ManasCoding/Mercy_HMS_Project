@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:7000/api/Profile", { withCredentials: true });
+        const res = await axios.get("https://mercy-hms-backend.onrender.com/api/Profile", { withCredentials: true });
         const firstName = res.data.name.split(" ")[0];
         // console.log(res.data);
         setItems(firstName);
@@ -24,7 +24,7 @@ const Sidebar = () => {
     const logout = async () => {
       try {
         console.log("logout");
-        const res = await axios.post("http://localhost:7000/api/logout", { withCredentials: true });
+        const res = await axios.post("https://mercy-hms-backend.onrender.com/api/logout", { withCredentials: true });
         console.log(res.data);
         navigate("/");
   
@@ -42,8 +42,10 @@ const Sidebar = () => {
     <div>
       <div className='w-full h-screen bg-[#65adff] flex flex-col justify-between'>
         <div className=' w-full flex flex-col items-start'>
-          <div className=' w-full flex items-start gap-2 p-5'>
-            <div className='w-[30%] h-[90%] rounded-full bg-cover bg-white'><img src={`http://localhost:7000${profilePic}`} alt="" /></div>
+          <div className=' w-full flex items-start gap-6 p-5'>
+            <div className='rounded-full bg-cover bg-white'><img src={`https://mercy-hms-backend.onrender.com/${profilePic}`}
+                  alt="profile Img"
+                  className="border-2 border-gray-100 w-[50px] h-[50px] object-cover rounded-full shadow-lg cursor-pointer" /></div>
             <div className='flex flex-col'>
               <div>{items}</div>
               <div className='text-xs'>Patient</div>

@@ -64,7 +64,7 @@ const ChangePassword = () => {
     try {
       const oldPassword = password.oldPassword;
       const newPassword = password.newPassword;
-      const response = await axios.post("http://localhost:7000/api/updatepassword", {
+      const response = await axios.post("https://mercy-hms-backend.onrender.com/api/updatepassword", {
         oldPassword,
         newPassword, 
       }, { withCredentials: true });

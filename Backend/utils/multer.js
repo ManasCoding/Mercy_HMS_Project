@@ -5,6 +5,11 @@ import path from "path";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+
+
+
+
+    
     console.log("hello");
     cb(null, './public/images/uploads')
   },
