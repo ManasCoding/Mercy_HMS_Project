@@ -71,7 +71,7 @@ const EditProfile = () => {
       const date = user.date;
       const phone = user.phone;
       const address = user.address;
-      const res = await axios.post("http://localhost:7000/api/updateprofile", {
+      const res = await axios.post("https://mercy-hms-backend.onrender.com/api/updateprofile", {
         gender,
         date,
         phone,
