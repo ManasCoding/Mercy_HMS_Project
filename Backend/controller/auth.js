@@ -133,7 +133,7 @@ function isLoggedIn(req, res, next) {
             res.status(401);
             return res.send("Please login first");
         } else {
-            const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+            const decoded = jsonwebtoken.verify(token, "fkaopirerqiofjafjalk");
             // console.log(decoded);
             req.user = decoded;
             // console.log("hello");
