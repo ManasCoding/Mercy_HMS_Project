@@ -4,9 +4,9 @@ import { hashPassword } from "../utils/bcrypt.js";
 import { generateToken } from "../utils/jwt.js";
 import jsonwebtoken from "jsonwebtoken";
 // import uploads from "../utils/multer.js";
-import multer from "multer";
-import crypto from "crypto";
-import path from "path";
+// import multer from "multer";
+// import crypto from "crypto";
+// import path from "path";
 
 const register = asyncHandler(async (req, res) => {
   const { name, email, pin, password } = req.body;

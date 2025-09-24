@@ -1,7 +1,7 @@
 import jsonwebtoken from "jsonwebtoken";
 export const generateToken = (payload) => {
     try {
-        return jsonwebtoken.sign(payload, process.env.JWT_SECRET, {
+        return jsonwebtoken.sign(payload, "fkaopirerqiofjafjalk", {
             expiresIn: "5d",
         });
     } catch (error) {
