@@ -45,18 +45,18 @@ The goal of Mercy HMS is to digitize hospital workflows and improve efficiency b
 
 ## 📂 Folder Structure
 
-Mercy-HMS/
+WebStream/
 │
 ├── frontend/
-│ ├── components/
-│ ├── pages/
-│ └── services/
+│   ├── src/
+│   ├── components/
+│   └── pages/
 │
 ├── backend/
-│ ├── models/
-│ ├── routes/
-│ ├── controllers/
-│ └── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── controllers/
+│   └── middleware/
 │
 └── README.md
 
