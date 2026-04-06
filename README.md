@@ -45,6 +45,7 @@ The goal of Mercy HMS is to digitize hospital workflows and improve efficiency b
 
 ## 📂 Folder Structure
 
+
 WebStream/
 │
 ├── frontend/
