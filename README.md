@@ -136,25 +136,4 @@ _Add your screenshots here (dashboard, appointment page, etc.)_
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to fork and submit pull requests.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-**Your Name**
-
-- GitHub: https://github.com/your-username  
-- LinkedIn: https://linkedin.com/in/your-profile  
-
----
-
 ⭐ If you like this project, give it a star!
